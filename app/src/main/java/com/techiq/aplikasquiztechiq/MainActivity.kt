@@ -19,7 +19,5 @@ class MainActivity : AppCompatActivity() {
         }
 
         val username = intent.getStringExtra(LoginActivity.KEY_USERNAME)
-        val textViewWelcome = findViewById<TextView>(R.id.textViewWelcomeMessage)
-        textViewWelcome.text = "Hallo $username"
     }
 }
