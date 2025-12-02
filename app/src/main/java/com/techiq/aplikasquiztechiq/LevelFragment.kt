@@ -23,15 +23,12 @@ class LevelFragment : Fragment() {
         val btnLevel3 = view.findViewById<LinearLayout>(R.id.btnLevel3)
 
         btnLevel1.setOnClickListener {
-            // nanti isi navigasi ke kuis level mudah
         }
 
         btnLevel2.setOnClickListener {
-            // nanti isi navigasi ke kuis level normal
         }
 
         btnLevel3.setOnClickListener {
-            // nanti isi navigasi ke kuis level sulit
         }
     }
 }
