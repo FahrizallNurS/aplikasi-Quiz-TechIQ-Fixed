@@ -32,7 +32,7 @@ class PilihBahasa : Fragment() {
 
     private fun bukaQuiz(materi: String) {
         val intent = Intent(requireContext(), QuizActivity::class.java)
-        intent.putExtra("materi", materi)
+        intent.putExtra("bahasa", materi)
         startActivity(intent)
     }
 }
