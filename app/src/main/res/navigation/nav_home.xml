@@ -26,4 +26,12 @@
         android:id="@+id/profilFragment"
         android:name="com.techiq.aplikasquiztechiq.frgamentt.ProfilFragment"
         android:label="ProfilFragment" />
+    <fragment
+        android:id="@+id/PilihBahasa"
+        android:name="com.techiq.aplikasquiztechiq.frgamentt.PilihBahasa"
+        android:label="Pilih Materi">
+        <action
+            android:id="@+id/action_PilihBahasa_to_HalamanKuis"
+            app:destination="@+id/HalamanKuis"/>
+    </fragment>
 </navigation>
