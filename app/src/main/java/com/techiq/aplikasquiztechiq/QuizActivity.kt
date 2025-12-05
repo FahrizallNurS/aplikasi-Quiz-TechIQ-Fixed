@@ -1,13 +1,13 @@
 package com.techiq.aplikasquiztechiq
 
 import android.os.Bundle
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import android.view.View
-import androidx.appcompat.widget.AppCompatButton
 
 class QuizActivity : AppCompatActivity() {
 
@@ -38,7 +38,7 @@ class QuizActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz)
 
-        // Insets bawaan dari kode kamu
+        // Insets
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -47,22 +47,23 @@ class QuizActivity : AppCompatActivity() {
 
         initViews()
 
-        // Ambil bahasa dari Intent
-        val bahasaDipilih = intent.getStringExtra("bahasa") ?: "Kotlin"
+        // Ambil bahasa dari Intent — (WAJIB sama dengan yang dikirim Fragment)
+        val bahasaDipilih = intent.getStringExtra("bahasa") ?: ""
 
-        // Ambil list soal sesuai bahasa
+        // Ambil soal sesuai bahasa
         listSoal = getSoalByBahasa(bahasaDipilih)
 
         jawabanPengguna.addAll(List(listSoal.size) { null })
 
         tampilkanSoal()
 
-        // EVENT CLICK OPSI
+        // Klik opsi
         opsi1.setOnClickListener { pilihJawaban(0) }
         opsi2.setOnClickListener { pilihJawaban(1) }
         opsi3.setOnClickListener { pilihJawaban(2) }
         opsi4.setOnClickListener { pilihJawaban(3) }
 
+        // Next Soal
         btnNext.setOnClickListener {
             if (indexSoal < listSoal.size - 1) {
                 indexSoal++
@@ -70,6 +71,7 @@ class QuizActivity : AppCompatActivity() {
             }
         }
 
+        // Back Soal
         btnBack.setOnClickListener {
             if (indexSoal > 0) {
                 indexSoal--
@@ -126,11 +128,12 @@ class QuizActivity : AppCompatActivity() {
         txtNomorSoal.text = "${indexSoal + 1}/${listSoal.size}"
         txtPertanyaan.text = soal.pertanyaan
 
-        txtOpsi1.text = soal.opsi1
-        txtOpsi2.text = soal.opsi2
-        txtOpsi3.text = soal.opsi3
-        txtOpsi4.text = soal.opsi4
+        txtOpsi1.text = soal.opsi[0]
+        txtOpsi2.text = soal.opsi[1]
+        txtOpsi3.text = soal.opsi[2]
+        txtOpsi4.text = soal.opsi[3]
 
+        // Highlight jawaban sebelumnya
         jawabanPengguna[indexSoal]?.let {
             highlightJawaban(it)
         }
@@ -139,28 +142,28 @@ class QuizActivity : AppCompatActivity() {
     private fun getSoalByBahasa(bahasa: String): List<Soal> {
         return when (bahasa) {
 
-            "Kotlin" -> listOf(
-                Soal("Ekstensi file Kotlin?", ".kt", ".kot", ".kl", ".view", 0),
-                Soal("Sintaks fungsi?", "fun", "def", "function", "fn", 0),
-                Soal("Tipe data teks?", "text", "str", "String", "varchar", 2),
-                Soal("Cara membuat variabel?", "var", "let", "make", "new", 0),
-                Soal("File layout default Android menggunakan format?", ".view", ".xml", ".html", ".layout", 1)
+            "python" -> listOf(
+                Soal("Apa ekstensi file Python?", listOf(".py", ".java", ".pyt", ".ph"), 0),
+                Soal("Perintah untuk mencetak teks?", listOf("print()", "echo()", "cout", "System.out"), 0),
+                Soal("Tipe data list di Python?", listOf("[]", "{}", "<>", "()"), 0),
+                Soal("Siapa pencipta Python?", listOf("Guido van Rossum", "James Gosling", "Linus Torvalds", "Rasmus"), 0),
+                Soal("Operator pembanding sama dengan?", listOf("==", "=", "===", ":="), 0)
             )
 
-            "PHP" -> listOf(
-                Soal("Ekstensi file PHP?", ".php", ".ph", ".php3", ".pp", 0),
-                Soal("Output teks di PHP?", "write()", "print()", "echo", "show()", 2),
-                Soal("Operator variabel PHP?", "@", "$", "%", "&", 1),
-                Soal("Array di PHP?", "[]", "{}", "array()", "<>", 2),
-                Soal("Koneksi database?", "mysqli_connect()", "db()", "connect()", "sql()", 0)
+            "kotlin" -> listOf(
+                Soal("Ekstensi file Kotlin?", listOf(".kt", ".kotlin", ".kot", ".android"), 0),
+                Soal("Keyword untuk membuat fungsi?", listOf("fun", "function", "def", "proc"), 0),
+                Soal("Framework Android resmi?", listOf("Android Studio", "Flutter", "React", "XCode"), 0),
+                Soal("Tipe data tidak null?", listOf("String", "String?", "var", "null"), 0),
+                Soal("Kotlin dibuat oleh?", listOf("JetBrains", "Google", "Oracle", "Microsoft"), 0)
             )
 
-            "Python" -> listOf(
-                Soal("Ekstensi file Python?", ".py", ".pyt", ".pyc", ".pt", 0),
-                Soal("Output di Python?", "say()", "out()", "print()", "echo()", 2),
-                Soal("List Python ditandai dengan?", "[]", "()", "{}", "<>", 0),
-                Soal("Komentar satu baris?", "//", "#", "--", "/* */", 1),
-                Soal("Loop Python?", "for", "repeat", "foreach", "loop", 0)
+            "php" -> listOf(
+                Soal("Ekstensi file PHP?", listOf(".php", ".ph", ".pht", ".pp"), 0),
+                Soal("Cara mencetak teks?", listOf("echo", "cout", "print()", "println"), 0),
+                Soal("Tanda membuka kode PHP?", listOf("<?php", "<?=", "<php>", "<!--"), 0),
+                Soal("PHP adalah bahasa?", listOf("Server-side", "Client-side", "Database", "Markup"), 0),
+                Soal("Pembuat PHP?", listOf("Rasmus Lerdorf", "Guido", "Gosling", "Brendan"), 0)
             )
 
             else -> emptyList()
@@ -170,9 +173,6 @@ class QuizActivity : AppCompatActivity() {
 
 data class Soal(
     val pertanyaan: String,
-    val opsi1: String,
-    val opsi2: String,
-    val opsi3: String,
-    val opsi4: String,
+    val opsi: List<String>,
     val jawabanBenar: Int
 )
