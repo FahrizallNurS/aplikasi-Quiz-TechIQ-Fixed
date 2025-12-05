@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_home.xml"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.techiq.aplikasquiztechiq.frgamentt.HomeFragment"
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_leaderboardFragment"
+            app:destination="@id/leaderboardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/leaderboardFragment"
+        android:name="com.techiq.aplikasquiztechiq.frgamentt.LeaderboardFragment"
+        android:label="fragment_leaderboard"
+        tools:layout="@layout/fragment_leaderboard" >
+        <action
+            android:id="@+id/action_leaderboardFragment_to_profilFragment"
+            app:destination="@id/profilFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profilFragment"
+        android:name="com.techiq.aplikasquiztechiq.frgamentt.ProfilFragment"
+        android:label="ProfilFragment" />
+    <fragment
+        android:id="@+id/PilihBahasa"
+        android:name="com.techiq.aplikasquiztechiq.frgamentt.PilihBahasa"
+        android:label="Pilih Materi">
+        <action
+            android:id="@+id/action_PilihBahasa_to_HalamanKuis"
+            app:destination="@+id/HalamanKuis"/>
+    </fragment>
+</navigation>
