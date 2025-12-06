@@ -100,30 +100,14 @@
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/card_total_skor"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="40dp"
         android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toStartOf="@id/btn_keluar"
-        android:layout_marginEnd="16dp"/>
-    <!-- Button Keluar -->
-    <Button
-        android:id="@+id/btn_keluar"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:text="Keluar"
-        android:textColor="#1E90FF"
-        android:background="@drawable/button_blue"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/card_total_skor"
-        app:layout_constraintStart_toEndOf="@id/btn_mulai_kuis"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="40dp"/>
 
     <!-- Baris 1 kiri -->
     <androidx.cardview.widget.CardView
-        android:id="@+id/card_kategori_1"
+        android:id="@+id/multi_categori"
         android:layout_width="0dp"
         android:layout_height="120dp"
         android:layout_marginStart="16dp"
@@ -172,7 +156,7 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Baris 1 kanan -->
+    <!-- Pilih -->
     <androidx.cardview.widget.CardView
         android:id="@+id/pilih_level"
         android:layout_width="0dp"
@@ -182,8 +166,8 @@
         android:layout_marginTop="32dp"
         app:cardCornerRadius="12dp"
         app:cardElevation="4dp"
-        app:layout_constraintTop_toBottomOf="@id/btn_keluar"
-        app:layout_constraintStart_toEndOf="@id/card_kategori_1"
+        app:layout_constraintTop_toBottomOf="@id/btn_mulai_kuis"
+        app:layout_constraintStart_toEndOf="@id/multi_categori"
         app:layout_constraintEnd_toEndOf="parent" >
 
         <LinearLayout
@@ -193,15 +177,12 @@
             android:padding="16dp"
             android:background="@drawable/outline_card">
 
-            <!-- Icon kategori -->
             <ImageView
                 android:id="@+id/pilih_level_im"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:contentDescription="Icon kategori2"
                 android:src="@drawable/pilih_level" />
-
-            <!-- Title kategori -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -210,8 +191,6 @@
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:layout_marginTop="8dp" />
-
-            <!-- teks kategori -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -223,9 +202,9 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Baris 2 kiri -->
+    <!-- leaderboard -->
     <androidx.cardview.widget.CardView
-        android:id="@+id/card_kategori_3"
+        android:id="@+id/card_leaderboard"
         android:layout_width="0dp"
         android:layout_height="120dp"
         android:layout_marginStart="16dp"
@@ -234,7 +213,7 @@
 
         app:cardCornerRadius="12dp"
         app:cardElevation="4dp"
-        app:layout_constraintTop_toBottomOf="@id/card_kategori_1"
+        app:layout_constraintTop_toBottomOf="@id/multi_categori"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/card_kategori_4" >
 
@@ -245,29 +224,24 @@
             android:padding="16dp"
             android:background="@drawable/outline_card">
 
-            <!-- Icon kategori -->
             <ImageView
                 android:id="@+id/leadboard"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:contentDescription="Icon kategori3"
                 android:src="@drawable/ic_leadboard" />
-
-            <!-- Title kategori -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Multi Kategori"
+                android:text="Leaderboard"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:layout_marginTop="8dp" />
-
-            <!-- Subtitle kategori -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="3 kategori berbeda"
+                android:text="Fitur dengan ranking point"
                 android:textColor="#99FFFFFF"
                 android:textSize="12sp"
                 android:layout_marginTop="4dp" />
@@ -283,11 +257,10 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
-
         app:cardCornerRadius="12dp"
         app:cardElevation="4dp"
         app:layout_constraintTop_toBottomOf="@id/pilih_level"
-        app:layout_constraintStart_toEndOf="@id/card_kategori_3"
+        app:layout_constraintStart_toEndOf="@id/card_leaderboard"
         app:layout_constraintEnd_toEndOf="parent" >
 
         <LinearLayout
@@ -297,29 +270,24 @@
             android:padding="16dp"
             android:background="@drawable/outline_card" >
 
-            <!-- Icon kategori -->
             <ImageView
                 android:id="@+id/iv_icon_kategori4"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:contentDescription="Icon kategori4"
                 android:src="@drawable/stats_record" />
-
-            <!-- Title kategori -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Multi Kategori"
+                android:text="Penghitung Point"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:layout_marginTop="8dp" />
-
-            <!-- Subtitle kategori -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="3 kategori berbeda"
+                android:text="Lacak point anda!"
                 android:textColor="#99FFFFFF"
                 android:textSize="12sp"
                 android:layout_marginTop="4dp" />

@@ -28,7 +28,7 @@ class LoginActivity : AppCompatActivity() {
         // lambda function
         buttonLogin.setOnClickListener {
             val username = editTextUserName.text.toString()
-            if (username == "Fahrizal" && editTextPassword.text.toString() == "123") {
+            if (username == "Admin" && editTextPassword.text.toString() == "123") {
                 val intent = Intent(this, MainActivity::class.java)
                 intent.putExtra(KEY_USERNAME, username)
                 startActivity(intent)
