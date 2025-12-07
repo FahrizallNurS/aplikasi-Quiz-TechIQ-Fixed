@@ -184,27 +184,27 @@ class QuizActivity : AppCompatActivity() {
         return when (bahasa) {
 
             "python" -> listOf(
-                Soal("Apa ekstensi file Python?", listOf(".py", ".java", ".pyt", ".ph"), 0),
-                Soal("Perintah untuk mencetak teks?", listOf("print()", "echo()", "cout", "System.out"), 0),
+                Soal("Apa ekstensi file Python?", listOf(".java", ".py", ".pyt", ".ph"), 1),
+                Soal("Perintah untuk mencetak teks?", listOf("cout", "echo()", "print()", "System.out"), 3),
                 Soal("Tipe data list di Python?", listOf("[]", "{}", "<>", "()"), 0),
-                Soal("Siapa pencipta Python?", listOf("Guido van Rossum", "James Gosling", "Linus Torvalds", "Rasmus"), 0),
-                Soal("Operator pembanding sama dengan?", listOf("==", "=", "===", ":="), 0)
+                Soal("Siapa pencipta Python?", listOf("Rasmus", "James Gosling", "Linus Torvalds", "Guido van Rossum"), 3),
+                Soal("Operator pembanding sama dengan?", listOf(":=", "=", "===", "=="), 3)
             )
 
             "kotlin" -> listOf(
-                Soal("Ekstensi file Kotlin?", listOf(".kt", ".kotlin", ".kot", ".android"), 0),
-                Soal("Keyword untuk membuat fungsi?", listOf("fun", "function", "def", "proc"), 0),
-                Soal("Framework Android resmi?", listOf("Android Studio", "Flutter", "React", "XCode"), 0),
-                Soal("Tipe data tidak null?", listOf("String", "String?", "var", "null"), 0),
-                Soal("Kotlin dibuat oleh?", listOf("JetBrains", "Google", "Oracle", "Microsoft"), 0)
+                Soal("Ekstensi file Kotlin?", listOf(".kot", ".kotlin", ".kt", ".android"), 2),
+                Soal("Keyword untuk membuat fungsi?", listOf("def", "function", "fun", "proc"), 2),
+                Soal("Framework Android resmi?", listOf("Xcode", "Flutter", "React", "Android Studio"), 3),
+                Soal("Tipe data tidak null?", listOf("null", "String?", "var", "val"), 1),
+                Soal("Kotlin dibuat oleh?", listOf("Google", "JetBrains", "Oracle", "Microsoft"), 1)
             )
 
             "php" -> listOf(
-                Soal("Ekstensi file PHP?", listOf(".php", ".ph", ".pht", ".pp"), 0),
-                Soal("Cara mencetak teks?", listOf("echo", "cout", "print()", "println"), 0),
-                Soal("Tanda membuka kode PHP?", listOf("<?php", "<?=", "<php>", "<!--"), 0),
-                Soal("PHP adalah bahasa?", listOf("Server-side", "Client-side", "Database", "Markup"), 0),
-                Soal("Pembuat PHP?", listOf("Rasmus Lerdorf", "Guido", "Gosling", "Brendan"), 0)
+                Soal("Ekstensi file PHP?", listOf(".php", ".pp", ".pht", ".ph"), 0),
+                Soal("Cara mencetak teks?", listOf("cout", "echo", "print()", "println"), 1),
+                Soal("Tanda membuka kode PHP?", listOf("<php>", "<?=", "<?php", "<!--"), 2),
+                Soal("PHP adalah bahasa?", listOf("Database", "Client-side", "Server-side", "Markup"), 2),
+                Soal("Pembuat PHP?", listOf("Brendan", "Guido", "Gosling", "Rasmus Lerdorf"), 3)
             )
 
             else -> emptyList()
