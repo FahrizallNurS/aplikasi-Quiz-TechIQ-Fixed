@@ -25,7 +25,6 @@ class LoginActivity : AppCompatActivity() {
         val editTextPassword = findViewById<EditText>(R.id.password_input)
         val buttonLogin = findViewById<Button>(R.id.login_btn)
 
-        // lambda function
         buttonLogin.setOnClickListener {
             val username = editTextUserName.text.toString()
             if (username == "Admin" && editTextPassword.text.toString() == "123") {
