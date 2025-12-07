@@ -1,5 +1,6 @@
 package com.techiq.aplikasquiztechiq
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
@@ -78,6 +79,26 @@ class QuizActivity : AppCompatActivity() {
                 tampilkanSoal()
             }
         }
+
+        btnSelesai.setOnClickListener {
+            val skorAkhir = hitungSkor()
+
+            val prefs = getSharedPreferences("quiz_prefs", MODE_PRIVATE)
+            val skorLama = prefs.getInt("total_score", 0)
+            val skorBaru = skorLama + skorAkhir
+
+            prefs.edit().putInt("total_score", skorBaru).apply()
+
+
+            // Arahkan ke MainActivity supaya auto buka halaman Leaderboard
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("menu", "leaderboard")
+            startActivity(intent)
+
+            // pindah ke LeaderboardActivity atau Fragment
+            finish() // biar quiz ditutup
+        }
+
     }
 
     private fun initViews() {
@@ -122,7 +143,18 @@ class QuizActivity : AppCompatActivity() {
         }
     }
 
+    private fun resetBackground() {
+        opsi1.setBackgroundResource(R.drawable.background_opsi)
+        opsi2.setBackgroundResource(R.drawable.background_opsi)
+        opsi3.setBackgroundResource(R.drawable.background_opsi)
+        opsi4.setBackgroundResource(R.drawable.background_opsi)
+    }
+
     private fun tampilkanSoal() {
+
+        // Reset warna tombol dulu sebelum tampilkan soal baru
+        resetBackground()
+
         val soal = listSoal[indexSoal]
 
         txtNomorSoal.text = "${indexSoal + 1}/${listSoal.size}"
@@ -136,6 +168,15 @@ class QuizActivity : AppCompatActivity() {
         // Highlight jawaban sebelumnya
         jawabanPengguna[indexSoal]?.let {
             highlightJawaban(it)
+        }
+
+        // === Atur Visibilitas Next & Selesai ===
+        if (indexSoal == listSoal.size - 1) {
+            btnNext.visibility = View.GONE    // sembunyikan next
+            btnSelesai.visibility = View.VISIBLE
+        } else {
+            btnNext.visibility = View.VISIBLE
+            btnSelesai.visibility = View.GONE
         }
     }
 
@@ -169,6 +210,18 @@ class QuizActivity : AppCompatActivity() {
             else -> emptyList()
         }
     }
+
+    private fun hitungSkor(): Int {
+        var skor = 0
+        for (i in listSoal.indices) {
+            if (jawabanPengguna[i] == listSoal[i].jawabanBenar) {
+                skor += 20  // misal tiap soal benar dapat 20 poin
+            }
+        }
+        return skor
+    }
+
+
 }
 
 data class Soal(

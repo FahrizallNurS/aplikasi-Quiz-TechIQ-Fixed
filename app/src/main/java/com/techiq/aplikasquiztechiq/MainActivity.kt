@@ -32,5 +32,12 @@ class MainActivity : AppCompatActivity() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         //menghubungkan bottom nav ke nav kontroler
         bottomNavigationView.setupWithNavController(navController)
+
+        // Cek apakah datang dari QuizActivity
+        val menuDipilih = intent.getStringExtra("menu")
+
+        if (menuDipilih == "leaderboard") {
+            bottomNavigationView.selectedItemId = R.id.leaderboardFragment
+        }
     }
 }
