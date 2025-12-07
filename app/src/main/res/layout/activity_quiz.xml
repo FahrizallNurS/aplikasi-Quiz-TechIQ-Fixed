@@ -6,9 +6,8 @@
     android:background="#0E121B"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".quizActivity">
+    tools:context=".QuizActivity">
 
-    <!-- Nomor Soal -->
     <TextView
         android:id="@+id/txtNomorSoal"
         android:layout_width="wrap_content"
