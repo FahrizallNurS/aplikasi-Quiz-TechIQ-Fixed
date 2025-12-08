@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.techiq.aplikasquiztechiq.R
 
@@ -22,7 +23,6 @@ class ProfilFragment : Fragment() {
     private lateinit var edtGender: EditText
     private lateinit var btnEdit: Button
     private lateinit var btnSimpan: Button
-    private lateinit var btnContinue: Button
 
     private val PICK_IMAGE = 100
     private var imageUri: Uri? = null
@@ -41,7 +41,6 @@ class ProfilFragment : Fragment() {
         edtGender = view.findViewById(R.id.edtGender)
         btnEdit = view.findViewById(R.id.btnEdit)
         btnSimpan = view.findViewById(R.id.btnSimpan)
-        btnContinue = view.findViewById(R.id.btnContinue)
 
         // Input disabled di awal
         setEditable(false)
@@ -65,12 +64,8 @@ class ProfilFragment : Fragment() {
         btnSimpan.setOnClickListener {
             saveProfile()
             setEditable(false)
-        }
-
-        // Tombol lanjut
-        btnContinue.setOnClickListener {
-            saveProfile()
-            // Tambahkan navigasi jika perlu
+            loadProfile() // Muat ulang data untuk memastikan tampilan konsisten
+            Toast.makeText(requireContext(), "Profil berhasil disimpan", Toast.LENGTH_SHORT).show()
         }
 
         return view
