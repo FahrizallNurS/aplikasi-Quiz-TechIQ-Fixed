@@ -25,11 +25,8 @@ class HomeFragment : Fragment() {
         val btnMulai = view.findViewById<Button>(R.id.btn_mulai_kuis)
         val totalSkorView = view.findViewById<TextView>(R.id.tv_total_skor_number)
 
-        // ambil skor
         val sharedPref = requireActivity().getSharedPreferences("quiz_prefs", android.content.Context.MODE_PRIVATE)
         val totalSkor = sharedPref.getInt("total_score", 0)
-
-        // tampilkan di card
         totalSkorView.text = totalSkor.toString()
 
         btnMulai.setOnClickListener {

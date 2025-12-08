@@ -21,7 +21,7 @@ class LoginActivity : AppCompatActivity() {
             insets
         }
 
-        val editTextUserName: EditText = findViewById(R.id.username_input)
+        val editTextUserName : EditText = findViewById(R.id.username_input)
         val editTextPassword = findViewById<EditText>(R.id.password_input)
         val buttonLogin = findViewById<Button>(R.id.login_btn)
 
@@ -29,7 +29,6 @@ class LoginActivity : AppCompatActivity() {
             val username = editTextUserName.text.toString()
             if (username == "Admin" && editTextPassword.text.toString() == "123") {
                 val intent = Intent(this, MainActivity::class.java)
-                intent.putExtra(KEY_USERNAME, username)
                 startActivity(intent)
                 Toast.makeText(this, "Login berhasil", Toast.LENGTH_SHORT).show()
             } else {
@@ -37,7 +36,5 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
-    companion object KEY {
-        const val KEY_USERNAME = "USERNAME"
-    }
+
 }
