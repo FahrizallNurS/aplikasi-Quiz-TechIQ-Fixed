@@ -67,5 +67,7 @@ class LeaderboardFragment : Fragment() {
         return view
     }
 
-    data class Player(val name: String, val score: Int)
+    data class Player(
+        val name: String,
+        val score: Int)
 }
