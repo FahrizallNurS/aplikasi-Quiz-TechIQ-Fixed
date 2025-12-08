@@ -23,7 +23,7 @@ class LeaderboardFragment : Fragment() {
         val prefs = requireActivity().getSharedPreferences("quiz_prefs", Context.MODE_PRIVATE)
         val skorPlayer = prefs.getInt("total_score", 0)
 
-        // Update skor utama di atas
+        // Update skor utama
         val txtMainScore = view.findViewById<TextView>(R.id.txtMainScore)
         txtMainScore.text = skorPlayer.toString()
 
@@ -32,10 +32,12 @@ class LeaderboardFragment : Fragment() {
             Player("Bimo Elang", 400),
             Player("Rijul", 300),
             Player("Alpin", 200),
-            Player("Rapid", 100)
+            Player("Rapid", 100),
+            Player("Wowo", 50),
+            Player("Owi", 40)
         )
 
-        // Gabungkan dummy + skor player
+        // Gabungkan dummy player dan skor player
         val allPlayers = (dummyPlayers + Player("Skor Anda", skorPlayer))
             .sortedByDescending { it.score }
 

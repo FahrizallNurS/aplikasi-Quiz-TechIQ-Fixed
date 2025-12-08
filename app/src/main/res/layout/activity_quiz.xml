@@ -145,8 +145,6 @@
     </LinearLayout>
 
 
-    <!-- Tombol Next -->
-
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnBack"
         android:layout_width="0dp"
@@ -183,7 +181,7 @@
         android:layout_marginTop="24dp"
         android:background="@drawable/rounded_background"
         android:textColor="@color/white"
-        android:padding="12dp"
+        android:padding="10dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
