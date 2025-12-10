@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import com.techiq.aplikasquiztechiq.LoginActivity
 import com.techiq.aplikasquiztechiq.R
 import java.io.File
 import java.io.FileOutputStream
@@ -23,6 +24,7 @@ class ProfilFragment : Fragment() {
     private lateinit var edtGender: EditText
     private lateinit var btnEdit: Button
     private lateinit var btnSimpan: Button
+    private lateinit var btnLogout: Button
     private val PICK_IMAGE = 100
 
     override fun onCreateView(
@@ -39,6 +41,7 @@ class ProfilFragment : Fragment() {
         edtGender = view.findViewById(R.id.edtGender)
         btnEdit = view.findViewById(R.id.btnEdit)
         btnSimpan = view.findViewById(R.id.btnSimpan)
+        btnLogout = view.findViewById(R.id.btnLogout)
 
         // Mulai: input tidak bisa di-edit
         setEditable(false)
@@ -64,6 +67,10 @@ class ProfilFragment : Fragment() {
             setEditable(false)
         }
 
+        btnLogout.setOnClickListener {
+            startActivity(Intent(requireActivity(), LoginActivity::class.java))
+            requireActivity().finish()
+        }
         return view
     }
 
