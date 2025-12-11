@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity() {
         //menghubungkan bottom nav ke nav kontroler
         bottomNavigationView.setupWithNavController(navController)
 
-        // Cek apakah datang dari QuizActivity
         val menuDipilih = intent.getStringExtra("menu")
         if (menuDipilih == "leaderboard") {
             bottomNavigationView.selectedItemId = R.id.leaderboardFragment

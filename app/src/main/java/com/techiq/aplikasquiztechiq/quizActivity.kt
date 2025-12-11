@@ -12,7 +12,6 @@ import androidx.core.view.WindowInsetsCompat
 
 class QuizActivity : AppCompatActivity() {
 
-    // VIEW
     private lateinit var txtNomorSoal: TextView
     private lateinit var txtPertanyaan: TextView
 
@@ -30,7 +29,6 @@ class QuizActivity : AppCompatActivity() {
     private lateinit var btnBack: AppCompatButton
     private lateinit var btnSelesai: AppCompatButton
 
-    // LOGIC
     private var indexSoal = 0
     private lateinit var listSoal: List<Soal>
     private val jawabanPengguna = mutableListOf<Int?>()
@@ -48,7 +46,7 @@ class QuizActivity : AppCompatActivity() {
 
         initViews()
 
-        // Ambil bahasa dari Intent — (WAJIB sama dengan yang dikirim Fragment)
+        // Ambil bahasa dari Intent
         val bahasaDipilih = intent.getStringExtra("bahasa") ?: ""
 
         // Ambil soal sesuai bahasa
@@ -95,8 +93,8 @@ class QuizActivity : AppCompatActivity() {
             intent.putExtra("menu", "leaderboard")
             startActivity(intent)
 
-            // pindah ke LeaderboardActivity atau Fragment
-            finish() // biar quiz ditutup
+            // pindah ke Leaderboard Fragment
+            finish()
         }
 
     }
@@ -152,7 +150,7 @@ class QuizActivity : AppCompatActivity() {
 
     private fun tampilkanSoal() {
 
-        // Reset warna tombol dulu sebelum tampilkan soal baru
+        // Reset warna tombol sebelum tampilkan soal baru
         resetBackground()
 
         val soal = listSoal[indexSoal]
@@ -170,9 +168,9 @@ class QuizActivity : AppCompatActivity() {
             highlightJawaban(it)
         }
 
-        // === Atur Visibilitas Next & Selesai ===
+        // Atur Visibilitas Next & Selesai
         if (indexSoal == listSoal.size - 1) {
-            btnNext.visibility = View.GONE    // sembunyikan next
+            btnNext.visibility = View.GONE
             btnSelesai.visibility = View.VISIBLE
         } else {
             btnNext.visibility = View.VISIBLE

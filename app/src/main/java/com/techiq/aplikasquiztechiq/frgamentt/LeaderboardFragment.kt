@@ -5,12 +5,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.techiq.aplikasquiztechiq.R
+import com.techiq.aplikasquiztechiq.adapter.LeaderboardAdapter
 
 class LeaderboardFragment : Fragment() {
+
+    data class Player(
+        val name: String,
+        val score: Int
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,47 +30,29 @@ class LeaderboardFragment : Fragment() {
         val prefs = requireActivity().getSharedPreferences("quiz_prefs", Context.MODE_PRIVATE)
         val skorPlayer = prefs.getInt("total_score", 0)
 
-        // Update skor utama di atas
+        // Tampilkan skor utama
         val txtMainScore = view.findViewById<TextView>(R.id.txtMainScore)
         txtMainScore.text = skorPlayer.toString()
 
-        // Dummy players
+        // Dummy data leaderboard
         val dummyPlayers = listOf(
             Player("Bimo Elang", 400),
             Player("Rijul", 300),
             Player("Alpin", 200),
-            Player("Rapid", 100)
+            Player("Rapid", 100),
+            Player("Wowo", 50),
+            Player("Owi", 40)
         )
 
-        // Gabungkan dummy + skor player
+        // Gabungkan dengan skor user
         val allPlayers = (dummyPlayers + Player("Skor Anda", skorPlayer))
             .sortedByDescending { it.score }
 
-        // Container linear layout
-        val container = view.findViewById<LinearLayout>(R.id.containerLeaderboard)
-        val itemLayout = R.layout.item_leaderboard_row
-
-        allPlayers.forEachIndexed { index, player ->
-            val row = layoutInflater.inflate(itemLayout, container, false)
-
-            val txtName = row.findViewById<TextView>(R.id.txtPlayerName)
-            val txtScore = row.findViewById<TextView>(R.id.txtPlayerScore)
-
-            txtName.text = "${index + 1}. ${player.name}"
-            txtScore.text = player.score.toString()
-
-            // Highlight row player
-            if (player.name == "Skor Anda") {
-                row.setBackgroundResource(R.drawable.rounded_item_yellow)
-                txtName.setTextColor(resources.getColor(R.color.black))
-                txtScore.setTextColor(resources.getColor(R.color.black))
-            }
-
-            container.addView(row)
-        }
+        // Setup RecyclerView
+        val rvLeaderboard = view.findViewById<RecyclerView>(R.id.rvLeaderboard)
+        rvLeaderboard.layoutManager = LinearLayoutManager(requireContext())
+        rvLeaderboard.adapter = LeaderboardAdapter(requireContext(), allPlayers)
 
         return view
     }
-
-    data class Player(val name: String, val score: Int)
 }
