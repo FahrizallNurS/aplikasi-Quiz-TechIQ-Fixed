@@ -175,16 +175,16 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSelesai"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="SELESAI"
-        android:layout_marginTop="24dp"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
         android:background="@drawable/rounded_background"
-        android:textColor="@color/white"
         android:padding="10dp"
+        android:text="SELESAI"
+        android:textColor="@color/white"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/btnBack"
+        app:layout_constraintStart_toStartOf="@+id/btnBack"
+        app:layout_constraintTop_toTopOf="@+id/btnNext" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
