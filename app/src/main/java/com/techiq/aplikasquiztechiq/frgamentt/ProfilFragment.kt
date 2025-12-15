@@ -13,10 +13,12 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.techiq.aplikasquiztechiq.LoginActivity
 import com.techiq.aplikasquiztechiq.R
+import java.io.File
+import java.io.FileOutputStream
 
 class ProfilFragment : Fragment() {
-
     private lateinit var imgProfile: ImageView
     private lateinit var edtNama: EditText
     private lateinit var edtUmur: EditText
@@ -25,7 +27,6 @@ class ProfilFragment : Fragment() {
     private lateinit var btnSimpan: Button
 
     private val PICK_IMAGE = 100
-    private var imageUri: Uri? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,10 +43,10 @@ class ProfilFragment : Fragment() {
         btnEdit = view.findViewById(R.id.btnEdit)
         btnSimpan = view.findViewById(R.id.btnSimpan)
 
-        // Input disabled di awal
+        // Mulai: input tidak bisa di-edit
         setEditable(false)
 
-        // Load data
+        // Load data user
         loadProfile()
 
         // Pilih foto
@@ -55,19 +56,18 @@ class ProfilFragment : Fragment() {
             startActivityForResult(pick, PICK_IMAGE)
         }
 
-        // Tombol edit
+        // Nyalakan mode edit
         btnEdit.setOnClickListener {
             setEditable(true)
         }
 
-        // Tombol simpan
+        // Simpan profil
         btnSimpan.setOnClickListener {
             saveProfile()
             setEditable(false)
             loadProfile() // Muat ulang data untuk memastikan tampilan konsisten
             Toast.makeText(requireContext(), "Profil berhasil disimpan", Toast.LENGTH_SHORT).show()
         }
-
         return view
     }
 
@@ -77,6 +77,7 @@ class ProfilFragment : Fragment() {
         edtGender.isEnabled = enable
     }
 
+    // Simpan data kecuali foto
     private fun saveProfile() {
         val shared = requireContext().getSharedPreferences("user_profile", Context.MODE_PRIVATE)
         val ed = shared.edit()
@@ -84,10 +85,10 @@ class ProfilFragment : Fragment() {
         ed.putString("nama", edtNama.text.toString())
         ed.putString("umur", edtUmur.text.toString())
         ed.putString("gender", edtGender.text.toString())
-        ed.putString("fotoUri", imageUri?.toString())
         ed.apply()
     }
 
+    // Ambil data + foto
     private fun loadProfile() {
         val shared = requireContext().getSharedPreferences("user_profile", Context.MODE_PRIVATE)
 
@@ -95,19 +96,44 @@ class ProfilFragment : Fragment() {
         edtUmur.setText(shared.getString("umur", ""))
         edtGender.setText(shared.getString("gender", ""))
 
-        val savedUri = shared.getString("fotoUri", null)
-        if (savedUri != null) {
-            imageUri = Uri.parse(savedUri)
-            imgProfile.setImageURI(imageUri)
+        // Load foto jika ada
+        val path = shared.getString("fotoPath", null)
+
+        if (path != null) {
+            val file = File(path)
+            if (file.exists()) {
+                imgProfile.setImageURI(Uri.fromFile(file))
+            }
         }
     }
 
+    // Simpan gambar ke internal storage
+    private fun saveImageToInternalStorage(uri: Uri): String {
+        val inputStream = requireContext().contentResolver.openInputStream(uri)
+        val file = File(requireContext().filesDir, "profile.jpg")
+        val outputStream = FileOutputStream(file)
+
+        inputStream?.copyTo(outputStream)
+        inputStream?.close()
+        outputStream.close()
+
+        return file.absolutePath
+    }
+
+    // Hasil pilih foto → simpan → tampilkan
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == PICK_IMAGE && resultCode == Activity.RESULT_OK) {
-            imageUri = data?.data
-            imgProfile.setImageURI(imageUri)
+            val uri = data?.data ?: return
+
+            val path = saveImageToInternalStorage(uri)
+
+            imgProfile.setImageURI(Uri.fromFile(File(path)))
+
+            val shared = requireContext()
+                .getSharedPreferences("user_profile", Context.MODE_PRIVATE)
+            shared.edit().putString("fotoPath", path).apply()
         }
     }
 }
