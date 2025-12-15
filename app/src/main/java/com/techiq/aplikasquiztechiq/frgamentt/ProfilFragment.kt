@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.techiq.aplikasquiztechiq.LoginActivity
 import com.techiq.aplikasquiztechiq.R
@@ -24,7 +25,7 @@ class ProfilFragment : Fragment() {
     private lateinit var edtGender: EditText
     private lateinit var btnEdit: Button
     private lateinit var btnSimpan: Button
-    private lateinit var btnLogout: Button
+
     private val PICK_IMAGE = 100
 
     override fun onCreateView(
@@ -41,7 +42,6 @@ class ProfilFragment : Fragment() {
         edtGender = view.findViewById(R.id.edtGender)
         btnEdit = view.findViewById(R.id.btnEdit)
         btnSimpan = view.findViewById(R.id.btnSimpan)
-        btnLogout = view.findViewById(R.id.btnLogout)
 
         // Mulai: input tidak bisa di-edit
         setEditable(false)
@@ -65,11 +65,8 @@ class ProfilFragment : Fragment() {
         btnSimpan.setOnClickListener {
             saveProfile()
             setEditable(false)
-        }
-
-        btnLogout.setOnClickListener {
-            startActivity(Intent(requireActivity(), LoginActivity::class.java))
-            requireActivity().finish()
+            loadProfile() // Muat ulang data untuk memastikan tampilan konsisten
+            Toast.makeText(requireContext(), "Profil berhasil disimpan", Toast.LENGTH_SHORT).show()
         }
         return view
     }

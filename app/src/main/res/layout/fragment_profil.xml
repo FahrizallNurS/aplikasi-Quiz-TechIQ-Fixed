@@ -106,18 +106,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="8dp"/>
 
-    <!-- BUTTON LOGOUT -->
-    <Button
-        android:id="@+id/btnLogout"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="Logout"
-        android:layout_marginTop="50dp"
-        android:backgroundTint="#EB4B49"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/btnSimpan"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="@+id/btnEdit"
-        app:layout_constraintTop_toBottomOf="@+id/input_gender_wrapper"
-        app:layout_constraintVertical_bias="0.706" />
 </androidx.constraintlayout.widget.ConstraintLayout>

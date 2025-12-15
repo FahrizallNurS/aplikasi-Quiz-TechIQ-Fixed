@@ -22,19 +22,14 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val username = intent.getStringExtra(LoginActivity.KEY_USERNAME)
-
-        //ambil navhost dari layout
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         //ambil controler dari host
         val navController = findNavController(R.id.nav_host_fragment)
-        //nampilkan bottomNavigation
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
 
         //menghubungkan bottom nav ke nav kontroler
         bottomNavigationView.setupWithNavController(navController)
 
-        // Cek apakah datang dari QuizActivity
         val menuDipilih = intent.getStringExtra("menu")
         if (menuDipilih == "leaderboard") {
             bottomNavigationView.selectedItemId = R.id.leaderboardFragment
